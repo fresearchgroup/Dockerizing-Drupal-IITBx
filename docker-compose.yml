@@ -1,0 +1,41 @@
+version: "3"
+
+services:
+
+  drupal:
+    image: drupal:9.2.0-php7.4-fpm-alpine3.13
+    container_name: drupal
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    restart: always
+    volumes:
+      - drupal-data:/var/www/html
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    env_file: .env
+    ports:
+       - 3306:3306
+    volumes:
+      - db-data:/var/lib/mysql
+
+  nginx-server:
+    image: nginx:1.17.4-alpine
+    container_name: nginx-server
+    depends_on:
+      - drupal
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - drupal-data:/var/www/html
+      - ./nginx-conf:/etc/nginx/conf.d
+   
+volumes:
+    db-data:
+    drupal-data:
