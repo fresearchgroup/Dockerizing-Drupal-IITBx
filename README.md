@@ -22,6 +22,7 @@ Dockerizing Drupal using  drupal version 9.2.0 and php version 7.4
   * Database username: user
   * Database password: password
   * Advanced options, Host: IP Address of MySQL docker container 
+* Mention site details (name, admin username and password, etc.) 
 
 
 
