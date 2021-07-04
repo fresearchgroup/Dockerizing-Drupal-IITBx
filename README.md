@@ -24,6 +24,12 @@ Dockerizing Drupal using  drupal version 9.2.0 and php version 7.4
   * Advanced options, Host: IP Address of MySQL docker container 
 * Mention site details (name, admin username and password, etc.) 
 
+### Other important commands
+* Find list of dockers running: ```sudo docker ps -a```
+* Go into a docker container: ```sudo docker exec -it <ContainerID> /bin/bash
+* Stop a docker container: ```sudo docker stop <ContainerID>```
+* Remove a docker container: ```sudo docker rm <ContainerID>```
+
 
 
 
