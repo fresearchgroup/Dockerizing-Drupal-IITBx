@@ -26,7 +26,7 @@ Dockerizing Drupal using  drupal version 9.2.0 and php version 7.4
 
 ### Other important commands
 * Find list of dockers running: ```sudo docker ps -a```
-* Go into a docker container: ```sudo docker exec -it <ContainerID> /bin/bash
+* Go into a docker container: ```sudo docker exec -it <ContainerID> /bin/bash```
 * Stop a docker container: ```sudo docker stop <ContainerID>```
 * Remove a docker container: ```sudo docker rm <ContainerID>```
 
