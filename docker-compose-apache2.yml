@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+
+  drupal:
+    container_name: drupal
+    build: ./drupal/
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    restart: always
+    volumes:
+      - ./drupal:/code
+      - drupal-data:/var/www/html
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    env_file: .env
+    ports:
+       - 3306:3306
+    volumes:
+      - database-data:/var/lib/mysql
+
+  php:
+    container_name: php
+    build: ./php/
+    depends_on:
+      - drupal
+
+  apache2-server:
+    container_name: apache2-server
+    build: ./apache2/
+    depends_on:
+      - drupal
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ./apache2:/code
+      - drupal-data:/var/www/html
+        #      - ./apache-conf:/etc/nginx/conf.d
+   
+volumes:
+    database-data:
+    drupal-data:
